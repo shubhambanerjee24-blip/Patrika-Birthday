@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRAZY PARTY FOR PATRIKA!</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    @keyframes bg-pan { 
+      0% { background-position: 0% 50%; } 
+      50% { background-position: 100% 50%; } 
+      100% { background-position: 0% 50%; } 
+    }
+    
+    .bg-crazy { 
+      background: linear-gradient(-45deg, #ff007f, #7a00ff, #00e5ff, #ffea00, #ff0055); 
+      background-size: 400% 400%; 
+      animation: bg-pan 5s ease infinite; 
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg) scale(1); }
+      50% { transform: translateY(50vh) rotate(180deg) scale(1.5); }
+      100% { transform: translateY(110vh) rotate(360deg) scale(1); }
+    }
+    
+    @keyframes float-crazy {
+      0%, 100% { transform: translate(0, 0) rotate(-5deg) scale(1); }
+      25% { transform: translate(10px, -20px) rotate(5deg) scale(1.1); }
+      50% { transform: translate(-15px, -30px) rotate(-10deg) scale(0.9); }
+      75% { transform: translate(20px, -10px) rotate(10deg) scale(1.2); }
+    }
+
+    @keyframes shake-violent {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      10% { transform: translate(-10px, -10px) rotate(-10deg); }
+      20% { transform: translate(10px, 10px) rotate(10deg); }
+      30% { transform: translate(-10px, 10px) rotate(-10deg); }
+      40% { transform: translate(10px, -10px) rotate(10deg); }
+      50% { transform: translate(-5px, -5px) rotate(-5deg); }
+      60% { transform: translate(5px, 5px) rotate(5deg); }
+      70% { transform: translate(-5px, 5px) rotate(-5deg); }
+      80% { transform: translate(5px, -5px) rotate(5deg); }
+      90% { transform: translate(0, -15px) rotate(0deg) scale(1.1); }
+    }
+
+    @keyframes explode-out {
+      0% { transform: scale(1); opacity: 1; filter: brightness(1); }
+      50% { transform: scale(2); filter: brightness(2); }
+      100% { transform: scale(10); opacity: 0; filter: brightness(5); }
+    }
+
+    @keyframes flicker-wild {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; transform: scale(1) skewX(0deg); }
+      20%, 24%, 55% { opacity: 0.5; transform: scale(1.1) skewX(-15deg); }
+    }
+
+    @keyframes zoom-spin-in {
+      0% { transform: scale(0) rotate(-720deg); opacity: 0; }
+      80% { transform: scale(1.2) rotate(10deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .animate-float-crazy { animation: float-crazy 3s ease-in-out infinite; }
+    .animate-shake-violent { animation: shake-violent 0.4s infinite; }
+    .animate-explode { animation: explode-out 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; pointer-events: none; }
+    .animate-flicker-wild { animation: flicker-wild 2s infinite; }
+    .animate-zoom-spin { animation: zoom-spin-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+    .neon-text-pink {
+      color: #fff;
+      text-shadow: 
+        0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00de, 
+        0 0 40px #ff00de, 0 0 80px #ff00de, 0 0 90px #ff00de, 
+        0 0 100px #ff00de, 0 0 150px #ff00de;
+    }
+    .neon-text-cyan {
+      color: #fff;
+      text-shadow: 
+        0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00e5ff, 
+        0 0 40px #00e5ff, 0 0 80px #00e5ff;
+    }
+
+    .crazy-sticker {
+      background-color: #fbbf24;
+      color: #000;
+      border: 4px solid #000;
+      box-shadow: 8px 8px 0px #000;
+      font-weight: 900;
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body class="min-h-screen bg-crazy flex items-center justify-center p-4 font-sans overflow-x-hidden relative">
+
+  <div id="confetti-container" class="fixed inset-0 pointer-events-none z-[100] overflow-hidden hidden"></div>
+  <div id="balloons-container" class="fixed inset-0 pointer-events-none z-0 hidden"></div>
+
+  <div id="unopened-wrapper" class="relative z-50 flex flex-col items-center justify-center w-full h-screen cursor-pointer group">
+    
+    <div id="gift-container" class="animate-float-crazy group-hover:animate-shake-violent transition-all duration-75 relative">
+      
+      <div id="lock-icon" class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-white bg-black/60 p-4 rounded-full backdrop-blur-sm border-2 border-white/20 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
+        <i data-lucide="lock" class="w-10 h-10"></i>
+      </div>
+
+      <svg width="200" height="200" viewBox="0 0 100 100" class="drop-shadow-[0_0_50px_rgba(255,255,255,0.8)] relative z-10">
+        <path d="M 50 35 C 20 5, 0 35, 45 45 Z" fill="#00e5ff" />
+        <path d="M 50 35 C 80 5, 100 35, 55 45 Z" fill="#ffea00" />
+        <rect x="15" y="45" width="70" height="50" rx="8" fill="#ff007f" />
+        <rect x="5" y="30" width="90" height="20" rx="5" fill="#7a00ff" />
+        <rect x="40" y="30" width="20" height="65" fill="#39ff14" />
+        <rect x="5" y="38" width="90" height="8" fill="#39ff14" />
+        <circle cx="50" cy="38" r="8" fill="#fff" />
+      </svg>
+    </div>
+    
+    <h1 id="warning-text" class="mt-8 text-4xl sm:text-6xl font-black text-white text-center uppercase tracking-widest animate-flicker-wild neon-text-cyan drop-shadow-2xl transition-all duration-300">
+      SPECIAL GIFT!<br>NO PEEKING!
+    </h1>
+
+    <!-- CRAZY COUNTDOWN CONTAINER -->
+    <div id="countdown-container" class="hidden mt-8 flex gap-2 sm:gap-6 text-center z-20">
+      <div class="bg-black border-4 border-cyan-400 shadow-[4px_4px_0px_#00e5ff] p-2 sm:p-4 min-w-[70px] sm:min-w-[90px] transform -rotate-2">
+        <div id="cd-days" class="text-3xl sm:text-5xl font-black text-white">00</div>
+        <div class="text-[10px] sm:text-xs text-yellow-400 font-bold tracking-widest mt-1">DAYS</div>
+      </div>
+      <div class="bg-black border-4 border-pink-500 shadow-[4px_4px_0px_#ff00de] p-2 sm:p-4 min-w-[70px] sm:min-w-[90px] transform rotate-2">
+        <div id="cd-hours" class="text-3xl sm:text-5xl font-black text-white">00</div>
+        <div class="text-[10px] sm:text-xs text-yellow-400 font-bold tracking-widest mt-1">HOURS</div>
+      </div>
+      <div class="bg-black border-4 border-yellow-400 shadow-[4px_4px_0px_#ffea00] p-2 sm:p-4 min-w-[70px] sm:min-w-[90px] transform -rotate-1">
+        <div id="cd-mins" class="text-3xl sm:text-5xl font-black text-white">00</div>
+        <div class="text-[10px] sm:text-xs text-cyan-300 font-bold tracking-widest mt-1">MINS</div>
+      </div>
+      <div class="bg-black border-4 border-green-500 shadow-[4px_4px_0px_#39ff14] p-2 sm:p-4 min-w-[70px] sm:min-w-[90px] transform rotate-3">
+        <div id="cd-secs" class="text-3xl sm:text-5xl font-black text-white">00</div>
+        <div class="text-[10px] sm:text-xs text-cyan-300 font-bold tracking-widest mt-1">SECS</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="opened-wrapper" class="hidden w-full min-h-screen relative z-10 flex flex-col items-center justify-start py-10 sm:py-20 px-4">
+    
+    <i data-lucide="zap" class="absolute top-10 left-4 text-yellow-300 w-16 h-16 animate-float-crazy" style="animation-duration: 2s; transform: rotate(-20deg);"></i>
+    <i data-lucide="star" class="absolute top-40 right-4 text-pink-400 w-12 h-12 fill-pink-400 animate-flicker-wild"></i>
+    <i data-lucide="music" class="absolute bottom-40 left-10 text-cyan-300 w-16 h-16 animate-float-crazy" style="animation-duration: 4s;"></i>
+
+    <div class="relative z-20 text-center animate-zoom-spin mb-10 w-full">
+      <h2 class="text-2xl sm:text-4xl font-bold text-white mb-2 uppercase tracking-widest drop-shadow-lg">IT'S PARTY TIME</h2>
+      <h1 class="text-6xl sm:text-8xl md:text-9xl font-black neon-text-pink leading-none uppercase transform -rotate-3 hover:rotate-3 transition-transform duration-300 cursor-default">
+        <span id="display-name"></span>!
+      </h1>
+      
+      <div class="flex justify-center mt-8 mb-4 animate-float-crazy">
+        <svg width="120" height="120" viewBox="0 0 100 100" class="drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+           <ellipse cx="50" cy="90" rx="45" ry="10" fill="#000" />
+           <rect x="20" y="55" width="60" height="35" rx="5" fill="#39ff14" />
+           <rect x="30" y="35" width="40" height="20" rx="5" fill="#ff00de" />
+           <path d="M 18 55 Q 35 70 50 55 Q 65 70 82 55 Z" fill="#00e5ff" />
+           <rect x="45" y="15" width="10" height="20" rx="2" fill="#fff" />
+           <path d="M 50 0 Q 40 10 50 15 Q 60 10 50 0 Z" fill="#ffea00" class="animate-flicker-wild" />
+        </svg>
+      </div>
+    </div>
+
+    <div id="message-container" class="relative z-30 w-full max-w-2xl flex flex-col items-center gap-8 mb-16">
+    </div>
+
+    <div class="relative z-30 mt-8 animate-float-crazy" style="animation-delay: 1s;">
+      <div class="bg-black text-white p-6 rounded-none border-4 border-cyan-400 shadow-[8px_8px_0px_#00e5ff] transform rotate-2 max-w-md mx-auto text-center">
+        <i data-lucide="flame" class="mx-auto text-yellow-400 w-10 h-10 mb-2 animate-pulse"></i>
+        <p id="display-quote" class="text-xl font-bold uppercase tracking-wider">
+        </p>
+      </div>
+    </div>
+
+    <button id="close-btn" class="relative z-40 mt-16 px-10 py-5 bg-yellow-400 text-black border-4 border-black shadow-[8px_8px_0px_#000] text-2xl font-black uppercase hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_#000] active:translate-x-2 active:translate-y-2 active:shadow-none transition-all duration-100 flex items-center justify-center gap-3 transform -rotate-2">
+      <i data-lucide="bomb" class="w-8 h-8"></i>
+      END THE MADNESS
+    </button>
+  </div>
+
+  <script>
+    const friendName = "Patrika";
+    
+    const birthdayDate = new Date("2026-03-31T00:00:00");
+    
+    const myMessages = [
+      "Happy birthday to the person who has quietly done so much, handled so much, and still manages to stay the same at heart. To the one who keeps things together when they could easily fall apart, who listens more than they speak, and who shows care in small, steady ways instead of loud ones. That strength, that calm, that honesty, it all speaks for itself. May this year return every bit of goodness you’ve put out into the world. May your difficult days slowly turn into easier ones, and may your efforts finally bring the results you deserve. Stay exactly as you are, grounded, genuine, and real. Happy birthday.",
+      "Whenever you come to mind, it’s never some big speech or serious moment. It’s random things. The way you say certain words. The way your tone changes when you’re explaining something you care about. The way you focus on your food like the whole world can wait. The look you give before you react to something, like your face always answers first. Those small things are very you. They’re not planned or perfect. They’re just natural, and that’s what makes them nice.",
+      "It’s not about grand qualities. It’s the normal stuff. The way you sit, the way you think before replying, the way you don’t pretend to be more than you are. That’s what stands out. You notice things. You remember small details. You don’t rush your words, and you don’t say things just to fill silence. You have your own rhythm, and you stick to it. That’s something I admire. You’re not trying to copy anyone or compete with anyone. You just do things in your own way.",
+      "One thing that stands out about you is how you deal with things. You don’t react to everything instantly. You take a second, think about it, and then respond. Not everyone does that. Even when you’re irritated or tired, you don’t let it spill everywhere. You keep it together in your own way. It’s not flashy, it’s just steady. And that says a lot.",
+      "You’re honest, and even when you’re being direct, it doesn’t feel hurtful. It just feels clear. That balance feels natural on you. Confident, but not loud.",
+      "On this day, I just hope you keep being exactly like this. Keep your habits, your expressions, your way of speaking, your way of doing things. They’re part of what makes you different. I hope this year feels steady, brings you good moments, and gives you reasons to smile for no big reason at all. Stay the same at your core, and keep growing in your own pace. Happy birthday.",
+      "I just hope the tough days slowly get replaced with better ones. I hope the things that stressed you out start working themselves out. I hope the moments that felt heavy become lighter. Whatever didn’t go your way before, may this year bring balance. May the disappointments turn into lessons that actually help you, and may the waiting turn into something worth it. I hope you get more reasons to smile without forcing it, more days that end peacefully, and more situations that make sense instead of confusion. Let this year be softer on you. Let it bring steady progress, good news at the right time, and the kind of happiness that feels simple and real. Once again Happy birthday pengulin.",
+      "Janamdin aaya hai, aap bas muskura dijiye,\nDil jo chahe chupke se, woh sab paa lijiye.\nJo bhi pareshaani thi, aaj door ho jaaye,\nHar nayi subah aapke liye khushkhabri laaye.\nAapki hansi se mehfil roshan ho jaaye,\nHar sapna aapka aaram se sach ho jaaye.\nChaand bhi aaj aapke liye zyada chamak jaaye,\nAur uski roshni aapki zindagi ko aur khoobsurat bana jaaye. 🌙✨"
+    ];
+
+    const inspirationalQuote = `"KEEP SHINING, BEAUTIFUL ONE. THE WORLD NEEDS YOUR LIGHT."`;
+
+    const unopenedWrapper = document.getElementById('unopened-wrapper');
+    const giftContainer = document.getElementById('gift-container');
+    const openedWrapper = document.getElementById('opened-wrapper');
+    const closeBtn = document.getElementById('close-btn');
+    const confettiContainer = document.getElementById('confetti-container');
+    const balloonsContainer = document.getElementById('balloons-container');
+    const warningText = document.getElementById('warning-text');
+    const lockIcon = document.getElementById('lock-icon');
+    const countdownContainer = document.getElementById('countdown-container');
+    const cdDays = document.getElementById('cd-days');
+    const cdHours = document.getElementById('cd-hours');
+    const cdMins = document.getElementById('cd-mins');
+    const cdSecs = document.getElementById('cd-secs');
+    
+    document.getElementById('display-name').innerText = friendName;
+    document.getElementById('display-quote').innerText = inspirationalQuote;
+    
+    let timerInterval;
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = birthdayDate - now;
+
+      if (diff <= 0) {
+        clearInterval(timerInterval);
+        countdownContainer.classList.add('hidden');
+        lockIcon.classList.add('hidden');
+        warningText.innerHTML = "READY!<br>TAP TO OPEN!";
+        warningText.classList.remove('text-red-500', 'neon-text-pink');
+        warningText.classList.add('neon-text-cyan');
+        return;
+      }
+
+      countdownContainer.classList.remove('hidden');
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      cdDays.innerText = d.toString().padStart(2, '0');
+      cdHours.innerText = h.toString().padStart(2, '0');
+      cdMins.innerText = m.toString().padStart(2, '0');
+      cdSecs.innerText = s.toString().padStart(2, '0');
+    }
+
+    if (new Date() < birthdayDate) {
+      lockIcon.classList.remove('hidden');
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    } else {
+      warningText.innerHTML = "READY!<br>TAP TO OPEN!";
+      warningText.classList.remove('text-red-500', 'neon-text-pink');
+      warningText.classList.add('neon-text-cyan');
+    }
+
+    const messageContainer = document.getElementById('message-container');
+    
+    const stickerColors = ['#39ff14', '#ff00de', '#00e5ff', '#ffea00', '#ff007f'];
+
+    myMessages.forEach((msg, index) => {
+      const sticker = document.createElement('div');
+      
+      const randomRotation = (Math.random() * 12) - 6;
+      const bgColor = stickerColors[index % stickerColors.length];
+      
+      sticker.className = `crazy-sticker p-5 sm:p-8 w-[95%] text-center text-lg sm:text-2xl leading-snug uppercase transition-transform hover:scale-110 cursor-crosshair whitespace-pre-wrap`;
+      sticker.style.transform = `rotate(${randomRotation}deg)`;
+      sticker.style.backgroundColor = bgColor;
+      
+      if(bgColor === '#ff007f' || bgColor === '#ff00de') {
+        sticker.style.color = 'white';
+        sticker.style.textShadow = '2px 2px 0 #000';
+      }
+
+      sticker.innerText = msg;
+      messageContainer.appendChild(sticker);
+    });
+
+    lucide.createIcons();
+
+    function generateConfetti() {
+      confettiContainer.innerHTML = '';
+      const colors = ['#39ff14', '#ff00de', '#00e5ff', '#ffea00', '#fff'];
+      
+      for (let i = 0; i < 80; i++) {
+        const p = document.createElement('div');
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const left = Math.random() * 100;
+        const width = Math.random() * 15 + 5; 
+        const height = Math.random() * 15 + 5;
+        const animDuration = Math.random() * 2 + 1.5; 
+        const animDelay = Math.random() * 1;
+        const isCircle = Math.random() > 0.5;
+
+        p.style.cssText = `
+          position: absolute;
+          left: ${left}vw;
+          top: -10vh;
+          width: ${width}px;
+          height: ${height}px;
+          background-color: ${color};
+          border-radius: ${isCircle ? '50%' : '0%'};
+          border: 2px solid #000;
+          animation: fall ${animDuration}s linear ${animDelay}s infinite;
+        `;
+        confettiContainer.appendChild(p);
+      }
+    }
+
+    function generateBalloons() {
+      balloonsContainer.innerHTML = ''; 
+      const balloonConfigs = [
+        { color: "#ff00de", left: "5%", delay: "0s", scale: 1, duration: '4s' },
+        { color: "#00e5ff", left: "85%", delay: "0.5s", scale: 1.5, duration: '6s' },
+        { color: "#ffea00", left: "15%", delay: "1.2s", scale: 0.8, duration: '3s' },
+        { color: "#39ff14", left: "75%", delay: "0.2s", scale: 1.2, duration: '5s' },
+        { color: "#ff007f", left: "45%", delay: "1s", scale: 2, duration: '7s' } 
+      ];
+
+      balloonConfigs.forEach(config => {
+        const b = document.createElement('div');
+        b.className = "absolute bottom-0 animate-float-crazy z-0 opacity-80 mix-blend-screen";
+        b.style.left = config.left;
+        b.style.animationDelay = config.delay;
+        b.style.animationDuration = config.duration;
+        b.style.transform = `scale(${config.scale})`;
+
+        b.innerHTML = `
+          <svg width="80" height="200" viewBox="0 0 60 180" class="drop-shadow-[0_0_20px_${config.color}]">
+            <path d="M 30 80 Q 20 110 40 140 T 20 180" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="5,5" />
+            <path d="M 30 10 C -10 10, -10 60, 25 78 C 28 80, 32 80, 35 78 C 70 60, 70 10, 30 10 Z" fill="${config.color}" stroke="#fff" stroke-width="2"/>
+            <path d="M 25 78 L 35 78 L 33 85 L 27 85 Z" fill="${config.color}" stroke="#fff" stroke-width="2"/>
+            <circle cx="20" cy="30" r="5" fill="#fff" opacity="0.8"/>
+            <circle cx="28" cy="22" r="3" fill="#fff" opacity="0.8"/>
+          </svg>
+        `;
+        balloonsContainer.appendChild(b);
+      });
+    }
+
+    function startParty() {
+      const now = new Date();
+      if (now < birthdayDate) {
+        warningText.innerHTML = "LOCKED!<br>COME BACK LATER!";
+        warningText.classList.remove('neon-text-cyan');
+        warningText.classList.add('neon-text-pink', 'text-red-500'); 
+        
+        giftContainer.classList.add('animate-shake-violent');
+        
+        setTimeout(() => {
+          giftContainer.classList.remove('animate-shake-violent');
+          warningText.innerHTML = "SPECIAL GIFT!<br>NO PEEKING!";
+          warningText.classList.remove('neon-text-pink', 'text-red-500');
+          warningText.classList.add('neon-text-cyan');
+        }, 800);
+        
+        return; 
+      }
+
+      giftContainer.classList.add('animate-explode');
+      
+      setTimeout(() => {
+        unopenedWrapper.classList.add('hidden');
+        giftContainer.classList.remove('animate-explode'); 
+        
+        openedWrapper.classList.remove('hidden');
+        openedWrapper.classList.add('flex'); 
+        
+        confettiContainer.classList.remove('hidden');
+        balloonsContainer.classList.remove('hidden');
+        
+        generateConfetti();
+        generateBalloons();
+      }, 400); 
+    }
+
+    function endParty() {
+      openedWrapper.classList.add('hidden');
+      openedWrapper.classList.remove('flex');
+      
+      unopenedWrapper.classList.remove('hidden');
+      
+      confettiContainer.classList.add('hidden');
+      balloonsContainer.classList.add('hidden');
+      
+      confettiContainer.innerHTML = '';
+      balloonsContainer.innerHTML = '';
+    }
+
+    unopenedWrapper.addEventListener('click', startParty);
+    closeBtn.addEventListener('click', endParty);
+
+  </script>
+</body>
+</html>
