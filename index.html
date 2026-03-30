@@ -3,192 +3,209 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRAZY PARTY FOR PATRIKA</title>
+  <title>The Patrika Times - Birthday Edition</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
-  
   <script src="https://unpkg.com/lucide@latest"></script>
-
+  
   <style>
-    @keyframes bg-pan { 
-      0% { background-position: 0% 50%; } 
-      50% { background-position: 100% 50%; } 
-      100% { background-position: 0% 50%; } 
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+
+    body {
+      background-color: #f4ebd0;
+      color: #1a1a1a;
+      font-family: 'Lora', serif;
     }
-    
-    .bg-crazy { 
-      background: linear-gradient(-45deg, #ff007f, #7a00ff, #00e5ff, #ffea00, #ff0055); 
-      background-size: 400% 400%; 
-      animation: bg-pan 5s ease infinite; 
+
+    .paper-texture {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .headline-font {
+      font-family: 'Playfair Display', serif;
     }
 
     @keyframes fall {
-      0% { transform: translateY(-10vh) rotate(0deg) scale(1); }
-      50% { transform: translateY(50vh) rotate(180deg) scale(1.5); }
-      100% { transform: translateY(110vh) rotate(360deg) scale(1); }
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
-    
-    @keyframes float-crazy {
-      0%, 100% { transform: translate(0, 0) rotate(-5deg) scale(1); }
-      25% { transform: translate(10px, -20px) rotate(5deg) scale(1.1); }
-      50% { transform: translate(-15px, -30px) rotate(-10deg) scale(0.9); }
-      75% { transform: translate(20px, -10px) rotate(10deg) scale(1.2); }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-5px) rotate(-2deg); }
+      40% { transform: translateX(5px) rotate(2deg); }
+      60% { transform: translateX(-5px) rotate(-2deg); }
+      80% { transform: translateX(5px) rotate(2deg); }
     }
-
-    @keyframes shake-violent {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      10% { transform: translate(-10px, -10px) rotate(-10deg); }
-      20% { transform: translate(10px, 10px) rotate(10deg); }
-      30% { transform: translate(-10px, 10px) rotate(-10deg); }
-      40% { transform: translate(10px, -10px) rotate(10deg); }
-      50% { transform: translate(-5px, -5px) rotate(-5deg); }
-      60% { transform: translate(5px, 5px) rotate(5deg); }
-      70% { transform: translate(-5px, 5px) rotate(-5deg); }
-      80% { transform: translate(5px, -5px) rotate(5deg); }
-      90% { transform: translate(0, -15px) rotate(0deg) scale(1.1); }
+    @keyframes fade-in {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes explode-out {
-      0% { transform: scale(1); opacity: 1; filter: brightness(1); }
-      50% { transform: scale(2); filter: brightness(2); }
-      100% { transform: scale(10); opacity: 0; filter: brightness(5); }
-    }
+    .animate-shake { animation: shake 0.4s ease-in-out; }
+    .animate-fade-in { animation: fade-in 0.8s ease-out forwards; }
 
-    @keyframes flicker-wild {
-      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; transform: scale(1) skewX(0deg); }
-      20%, 24%, 55% { opacity: 0.5; transform: scale(1.1) skewX(-15deg); }
-    }
-
-    @keyframes zoom-spin-in {
-      0% { transform: scale(0) rotate(-720deg); opacity: 0; }
-      80% { transform: scale(1.2) rotate(10deg); opacity: 1; }
-      100% { transform: scale(1) rotate(0deg); opacity: 1; }
-    }
-
-    .animate-float-crazy { animation: float-crazy 3s ease-in-out infinite; }
-    .animate-shake-violent { animation: shake-violent 0.4s infinite; }
-    .animate-explode { animation: explode-out 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; pointer-events: none; }
-    .animate-flicker-wild { animation: flicker-wild 2s infinite; }
-    .animate-zoom-spin { animation: zoom-spin-in 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-
-    .neon-text-pink {
-      color: #fff;
-      text-shadow: 
-        0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff00de, 
-        0 0 40px #ff00de, 0 0 80px #ff00de, 0 0 90px #ff00de, 
-        0 0 100px #ff00de, 0 0 150px #ff00de;
-    }
-    .neon-text-cyan {
-      color: #fff;
-      text-shadow: 
-        0 0 5px #fff, 0 0 10px #fff, 0 0 20px #00e5ff, 
-        0 0 40px #00e5ff, 0 0 80px #00e5ff;
-    }
-
-    .crazy-sticker {
-      background-color: #fbbf24;
-      color: #000;
-      border: 4px solid #000;
-      box-shadow: 8px 8px 0px #000;
-      font-weight: 900;
+    .border-double-thick {
+      border-style: double;
+      border-width: 6px;
+      border-color: #1a1a1a;
     }
 
     .hidden { display: none !important; }
   </style>
 </head>
-<body class="min-h-screen bg-crazy flex items-center justify-center p-4 font-sans overflow-x-hidden relative">
+<body class="min-h-screen flex items-center justify-center p-2 sm:p-4 overflow-x-hidden relative">
 
+  <div class="paper-texture"></div>
   <div id="confetti-container" class="fixed inset-0 pointer-events-none z-[100] overflow-hidden hidden"></div>
-  <div id="balloons-container" class="fixed inset-0 pointer-events-none z-0 hidden"></div>
 
-  <div id="unopened-wrapper" class="relative z-50 flex flex-col items-center justify-center w-full h-screen cursor-pointer group">
+  <div id="unopened-wrapper" class="relative z-50 flex flex-col items-center justify-center w-full max-w-2xl bg-[#fdfbf7] p-8 sm:p-12 border-double-thick shadow-[10px_10px_0px_rgba(0,0,0,0.8)] cursor-pointer group transition-transform hover:-translate-y-1">
     
-    <div id="gift-container" class="animate-float-crazy group-hover:animate-shake-violent transition-all duration-75 relative">
+    <div class="text-center w-full border-b-2 border-black pb-4 mb-8">
+      <h2 class="text-sm tracking-[0.3em] font-bold uppercase mb-2">Confidential Material</h2>
+      <h1 class="headline-font text-4xl sm:text-6xl font-black uppercase tracking-tighter">Top Secret Dispatch</h1>
+    </div>
+
+    <div id="gift-container" class="relative my-4 transition-all duration-200">
       
-      <div id="lock-icon" class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-white bg-black/60 p-4 rounded-full backdrop-blur-sm border-2 border-white/20 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]">
-        <i data-lucide="lock" class="w-10 h-10"></i>
+      <div id="lock-icon" class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 text-black bg-[#f4ebd0] p-4 rounded-full border-2 border-black shadow-md">
+        <i data-lucide="lock" class="w-8 h-8"></i>
       </div>
 
-      <svg width="200" height="200" viewBox="0 0 100 100" class="drop-shadow-[0_0_50px_rgba(255,255,255,0.8)] relative z-10">
-        <path d="M 50 35 C 20 5, 0 35, 45 45 Z" fill="#00e5ff" />
-        <path d="M 50 35 C 80 5, 100 35, 55 45 Z" fill="#ffea00" />
-        <rect x="15" y="45" width="70" height="50" rx="8" fill="#ff007f" />
-        <rect x="5" y="30" width="90" height="20" rx="5" fill="#7a00ff" />
-        <rect x="40" y="30" width="20" height="65" fill="#39ff14" />
-        <rect x="5" y="38" width="90" height="8" fill="#39ff14" />
-        <circle cx="50" cy="38" r="8" fill="#fff" />
+      <svg width="180" height="120" viewBox="0 0 100 70" class="drop-shadow-md mx-auto">
+        <rect x="5" y="10" width="90" height="50" fill="#e5d9b7" stroke="#1a1a1a" stroke-width="2"/>
+        <path d="M 5 10 L 50 40 L 95 10" fill="none" stroke="#1a1a1a" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M 5 60 L 40 35" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+        <path d="M 95 60 L 60 35" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+        <circle cx="50" cy="40" r="8" fill="#8b0000" stroke="#1a1a1a" stroke-width="1.5"/>
+        <circle cx="50" cy="40" r="5" fill="#a52a2a"/>
+        <path d="M 48 38 L 52 42 M 52 38 L 48 42" stroke="#fff" stroke-width="1" opacity="0.6"/>
       </svg>
     </div>
     
-    <h1 id="warning-text" class="mt-8 text-4xl sm:text-6xl font-black text-white text-center uppercase tracking-widest animate-flicker-wild neon-text-cyan drop-shadow-2xl transition-all duration-300">
-      SPECIAL GIFT!<br>NO PEEKING!
-    </h1>
+    <h3 id="warning-text" class="mt-8 text-2xl sm:text-3xl font-black text-center uppercase tracking-widest headline-font">
+      EMBARGOED RELEASE!<br>DO NOT OPEN YET!
+    </h3>
 
-    <div id="countdown-container" class="hidden mt-8 flex gap-2 sm:gap-6 text-center z-20">
-      <div class="bg-black border-4 border-cyan-400 shadow-[4px_4px_0px_#00e5ff] p-2 sm:p-4 min-w-[70px] sm:min-w-[90px] transform -rotate-2">
-        <div id="cd-days" class="text-3xl sm:text-5xl font-black text-white">00</div>
-        <div class="text-[10px] sm:text-xs text-yellow-400 font-bold tracking-widest mt-1">DAYS</div>
+    <div id="action-buttons" class="hidden mt-8 flex-col sm:flex-row gap-4 w-full justify-center items-center z-20">
+      <label class="cursor-pointer px-6 py-3 border-2 border-black bg-black text-[#f4ebd0] text-xs sm:text-sm font-bold uppercase tracking-widest hover:bg-transparent hover:text-black transition-colors text-center w-full sm:w-auto shadow-[4px_4px_0px_rgba(0,0,0,0.3)] hover:shadow-none hover:translate-y-1 hover:translate-x-1">
+        Upload Front Page Photo
+        <input type="file" id="cover-photo-input" accept="image/*" class="hidden" />
+      </label>
+      <button id="open-newspaper-btn" class="px-6 py-3 border-2 border-black text-black text-xs sm:text-sm font-bold uppercase tracking-widest hover:bg-black hover:text-[#f4ebd0] transition-colors w-full sm:w-auto shadow-[4px_4px_0px_rgba(0,0,0,0.3)] hover:shadow-none hover:translate-y-1 hover:translate-x-1">
+        Read Without Photo
+      </button>
+    </div>
+
+    <div id="countdown-container" class="hidden w-full mt-8 pt-6 border-t border-black flex flex-wrap justify-center gap-4 sm:gap-8 text-center z-20 font-mono">
+      <div>
+        <div id="cd-days" class="text-3xl sm:text-4xl font-bold">00</div>
+        <div class="text-xs uppercase font-bold tracking-widest mt-1 border-t border-black pt-1">Days</div>
       </div>
-      <div class="bg-black border-4 border-pink-500 shadow-[4px_4px_0px_#ff00de] p-2 sm:p-4 min-w-[70px] sm:min-w-[90px] transform rotate-2">
-        <div id="cd-hours" class="text-3xl sm:text-5xl font-black text-white">00</div>
-        <div class="text-[10px] sm:text-xs text-yellow-400 font-bold tracking-widest mt-1">HOURS</div>
+      <div>
+        <div id="cd-hours" class="text-3xl sm:text-4xl font-bold">00</div>
+        <div class="text-xs uppercase font-bold tracking-widest mt-1 border-t border-black pt-1">Hrs</div>
       </div>
-      <div class="bg-black border-4 border-yellow-400 shadow-[4px_4px_0px_#ffea00] p-2 sm:p-4 min-w-[70px] sm:min-w-[90px] transform -rotate-1">
-        <div id="cd-mins" class="text-3xl sm:text-5xl font-black text-white">00</div>
-        <div class="text-[10px] sm:text-xs text-cyan-300 font-bold tracking-widest mt-1">MINS</div>
+      <div>
+        <div id="cd-mins" class="text-3xl sm:text-4xl font-bold">00</div>
+        <div class="text-xs uppercase font-bold tracking-widest mt-1 border-t border-black pt-1">Min</div>
       </div>
-      <div class="bg-black border-4 border-green-500 shadow-[4px_4px_0px_#39ff14] p-2 sm:p-4 min-w-[70px] sm:min-w-[90px] transform rotate-3">
-        <div id="cd-secs" class="text-3xl sm:text-5xl font-black text-white">00</div>
-        <div class="text-[10px] sm:text-xs text-cyan-300 font-bold tracking-widest mt-1">SECS</div>
+      <div>
+        <div id="cd-secs" class="text-3xl sm:text-4xl font-bold">00</div>
+        <div class="text-xs uppercase font-bold tracking-widest mt-1 border-t border-black pt-1">Sec</div>
       </div>
     </div>
   </div>
 
 
-  <div id="opened-wrapper" class="hidden w-full min-h-screen relative z-10 flex flex-col items-center justify-start py-10 sm:py-20 px-4">
+  <div id="opened-wrapper" class="hidden w-full max-w-6xl min-h-screen relative z-10 flex flex-col items-center py-8 sm:py-12">
     
-    <i data-lucide="zap" class="absolute top-10 left-4 text-yellow-300 w-16 h-16 animate-float-crazy" style="animation-duration: 2s; transform: rotate(-20deg);"></i>
-    <i data-lucide="star" class="absolute top-40 right-4 text-pink-400 w-12 h-12 fill-pink-400 animate-flicker-wild"></i>
-    <i data-lucide="music" class="absolute bottom-40 left-10 text-cyan-300 w-16 h-16 animate-float-crazy" style="animation-duration: 4s;"></i>
-
-    <div class="relative z-20 text-center animate-zoom-spin mb-10 w-full">
-      <h2 class="text-2xl sm:text-4xl font-bold text-white mb-2 uppercase tracking-widest drop-shadow-lg">IT'S PARTY TIME</h2>
-      <h1 class="text-6xl sm:text-8xl md:text-9xl font-black neon-text-pink leading-none uppercase transform -rotate-3 hover:rotate-3 transition-transform duration-300 cursor-default">
-        <span id="display-name"></span>!
-      </h1>
+    <div class="bg-[#fdfbf7] p-6 sm:p-10 border border-gray-300 shadow-2xl w-full animate-fade-in relative">
       
-      <div class="flex justify-center mt-8 mb-4 animate-float-crazy">
-        <svg width="120" height="120" viewBox="0 0 100 100" class="drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-           <ellipse cx="50" cy="90" rx="45" ry="10" fill="#000" />
-           <rect x="20" y="55" width="60" height="35" rx="5" fill="#39ff14" />
-           <rect x="30" y="35" width="40" height="20" rx="5" fill="#ff00de" />
-           <path d="M 18 55 Q 35 70 50 55 Q 65 70 82 55 Z" fill="#00e5ff" />
-           <rect x="45" y="15" width="10" height="20" rx="2" fill="#fff" />
-           <path d="M 50 0 Q 40 10 50 15 Q 60 10 50 0 Z" fill="#ffea00" class="animate-flicker-wild" />
-        </svg>
+      <header class="text-center border-b-4 border-double-thick pb-6 mb-8">
+        <h2 class="text-sm font-bold tracking-widest uppercase mb-4 text-gray-600">The Global Edition</h2>
+        <h1 class="headline-font text-5xl sm:text-7xl md:text-9xl font-black uppercase tracking-tighter text-gray-900 mb-4">
+          The Patrika Times
+        </h1>
+        
+        <div class="flex flex-col sm:flex-row justify-between items-center border-t-2 border-b-2 border-gray-900 py-2 px-4 text-xs sm:text-sm font-bold uppercase tracking-wider font-mono">
+          <span class="mb-2 sm:mb-0">Vol. I — No. 1</span>
+          <span class="mb-2 sm:mb-0">Tuesday, March 31, 2026</span>
+          <span>Price: Priceless</span>
+        </div>
+      </header>
+
+      <div class="text-center mb-10 border-b border-gray-400 pb-8">
+        <h2 class="text-xl sm:text-3xl italic mb-4">Extra! Extra! Read all about it!</h2>
+        <h1 class="headline-font text-4xl sm:text-6xl md:text-8xl font-black uppercase leading-[0.9] text-gray-900 mb-8">
+          A Genuine Soul Celebrates Another Year
+        </h1>
+        
+        <div class="flex justify-center my-6 px-4">
+          <img id="uploaded-image" class="hidden w-full max-w-xl h-auto object-cover border-4 border-[#1a1a1a] p-2 bg-white grayscale contrast-125 sepia-[.30] drop-shadow-lg" alt="Lead Story Photo" />
+
+          <svg id="default-cake" width="150" height="150" viewBox="0 0 100 100">
+            <ellipse cx="50" cy="85" rx="45" ry="8" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+            <path d="M 10 85 Q 50 95 90 85" fill="none" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="2,2"/>
+            <rect x="20" y="55" width="60" height="30" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+            <line x1="20" y1="65" x2="80" y2="65" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,2"/>
+            <line x1="20" y1="75" x2="80" y2="75" stroke="#1a1a1a" stroke-width="1" stroke-dasharray="4,2"/>
+            <rect x="30" y="35" width="40" height="20" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+            <path d="M 20 55 Q 25 65 30 55 Q 35 65 40 55 Q 45 65 50 55 Q 55 65 60 55 Q 65 65 70 55 Q 75 65 80 55" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+            <path d="M 30 35 Q 36 45 42 35 Q 48 45 54 35 Q 60 45 66 35" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+            <rect x="47" y="15" width="6" height="20" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+            <path d="M 50 3 Q 45 10 50 15 Q 55 10 50 3 Z" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+            <line x1="50" y1="0" x2="50" y2="-5" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="40" y1="5" x2="45" y2="8" stroke="#1a1a1a" stroke-width="1.5"/>
+            <line x1="60" y1="5" x2="55" y2="8" stroke="#1a1a1a" stroke-width="1.5"/>
+          </svg>
+        </div>
       </div>
-    </div>
 
-    <div id="message-container" class="relative z-30 w-full max-w-2xl flex flex-col items-center gap-8 mb-16">
-    </div>
+      <div id="message-container" class="columns-1 md:columns-2 lg:columns-3 gap-8 text-gray-800 text-justify">
+      </div>
 
-    <div class="relative z-30 mt-8 animate-float-crazy" style="animation-delay: 1s;">
-      <div class="bg-black text-white p-6 rounded-none border-4 border-cyan-400 shadow-[8px_8px_0px_#00e5ff] transform rotate-2 max-w-md mx-auto text-center">
-        <i data-lucide="flame" class="mx-auto text-yellow-400 w-10 h-10 mb-2 animate-pulse"></i>
-        <p id="display-quote" class="text-xl font-bold uppercase tracking-wider">
+      <div class="mt-12 pt-8 border-t-2 border-b-2 border-black py-6 text-center">
+        <h3 class="text-sm font-bold uppercase tracking-widest mb-2 text-gray-500">Quote of the Day</h3>
+        <p id="display-quote" class="headline-font text-2xl sm:text-3xl italic font-bold">
         </p>
       </div>
-    </div>
 
-    <button id="close-btn" class="relative z-40 mt-16 px-10 py-5 bg-yellow-400 text-black border-4 border-black shadow-[8px_8px_0px_#000] text-2xl font-black uppercase hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_#000] active:translate-x-2 active:translate-y-2 active:shadow-none transition-all duration-100 flex items-center justify-center gap-3 transform -rotate-2">
-      <i data-lucide="bomb" class="w-8 h-8"></i>
-      END THE MADNESS
-    </button>
+      <div class="mt-12 border-4 border-double border-gray-800 p-6 sm:p-8 bg-[#e5d9b7] shadow-inner">
+        <h3 class="headline-font text-2xl sm:text-3xl font-bold uppercase mb-2 text-center border-b-2 border-gray-800 pb-4">Send a Telegram to Patrika</h3>
+        <p class="text-center text-sm sm:text-base italic mb-6 text-gray-700">Have your own message? Send it directly to the editor's desk.</p>
+        
+        <form id="telegram-form" action="https://formsubmit.co/ajax/banerjeeshubham00@gmail.com" method="POST" class="max-w-2xl mx-auto flex flex-col gap-5">
+          <input type="hidden" name="_subject" value="New Birthday Telegram for Patrika!">
+          <input type="hidden" name="_template" value="box">
+          <input type="hidden" name="_captcha" value="false">
+          
+          <div>
+            <label for="sender-message" class="block text-sm font-bold uppercase tracking-widest mb-2 text-gray-800">Your Message</label>
+            <textarea id="sender-message" name="Message" rows="4" required class="w-full p-3 border-2 border-gray-800 bg-[#fdfbf7] text-black font-serif focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors resize-y" placeholder="Write your heartfelt birthday wish here..."></textarea>
+          </div>
+          
+          <button type="submit" id="telegram-submit-btn" class="mt-2 w-full sm:w-auto self-center px-10 py-3 bg-gray-900 text-[#f4ebd0] text-sm font-bold uppercase tracking-widest hover:bg-black transition-colors duration-300 border-2 border-black shadow-[4px_4px_0px_rgba(0,0,0,0.6)] hover:shadow-none hover:translate-y-1 hover:translate-x-1">
+            Dispatch Telegram
+          </button>
+        </form>
+      </div>
+
+      <div class="mt-12 flex justify-center">
+        <button id="close-btn" class="px-8 py-3 bg-transparent border-2 border-black text-black text-sm font-bold uppercase tracking-widest hover:bg-black hover:text-[#f4ebd0] transition-colors duration-300">
+          Fold Newspaper
+        </button>
+      </div>
+
+    </div>
   </div>
 
   <script>
     const friendName = "Patrika";
-    
     const birthdayDate = new Date("2026-03-31T00:00:00");
     
     const myMessages = [
@@ -202,14 +219,13 @@
       "Janamdin aaya hai, aap bas muskura dijiye,\nDil jo chahe chupke se, woh sab paa lijiye.\nJo bhi pareshaani thi, aaj door ho jaaye,\nHar nayi subah aapke liye khushkhabri laaye.\nAapki hansi se mehfil roshan ho jaaye,\nHar sapna aapka aaram se sach ho jaaye.\nChaand bhi aaj aapke liye zyada chamak jaaye,\nAur uski roshni aapki zindagi ko aur khoobsurat bana jaaye. 🌙✨"
     ];
 
-    const inspirationalQuote = `"KEEP SHINING, BEAUTIFUL ONE. THE WORLD NEEDS YOUR LIGHT."`;
+    const inspirationalQuote = `"Keep shining, beautiful one. The world needs your light."`;
 
     const unopenedWrapper = document.getElementById('unopened-wrapper');
     const giftContainer = document.getElementById('gift-container');
     const openedWrapper = document.getElementById('opened-wrapper');
     const closeBtn = document.getElementById('close-btn');
     const confettiContainer = document.getElementById('confetti-container');
-    const balloonsContainer = document.getElementById('balloons-container');
     const warningText = document.getElementById('warning-text');
     const lockIcon = document.getElementById('lock-icon');
     const countdownContainer = document.getElementById('countdown-container');
@@ -217,11 +233,23 @@
     const cdHours = document.getElementById('cd-hours');
     const cdMins = document.getElementById('cd-mins');
     const cdSecs = document.getElementById('cd-secs');
+    const actionButtons = document.getElementById('action-buttons');
+    const coverPhotoInput = document.getElementById('cover-photo-input');
+    const uploadedImage = document.getElementById('uploaded-image');
+    const defaultCake = document.getElementById('default-cake');
+    const openNewspaperBtn = document.getElementById('open-newspaper-btn');
     
-    document.getElementById('display-name').innerText = friendName;
     document.getElementById('display-quote').innerText = inspirationalQuote;
     
     let timerInterval;
+
+    function unlockDispatch() {
+      countdownContainer.classList.add('hidden');
+      lockIcon.classList.add('hidden');
+      warningText.innerHTML = "PRESS RELEASE READY!";
+      actionButtons.classList.remove('hidden');
+      actionButtons.classList.add('flex');
+    }
 
     function updateTimer() {
       const now = new Date();
@@ -229,11 +257,7 @@
 
       if (diff <= 0) {
         clearInterval(timerInterval);
-        countdownContainer.classList.add('hidden');
-        lockIcon.classList.add('hidden');
-        warningText.innerHTML = "READY!<br>TAP TO OPEN!";
-        warningText.classList.remove('text-red-500', 'neon-text-pink');
-        warningText.classList.add('neon-text-cyan');
+        unlockDispatch();
         return;
       }
 
@@ -255,49 +279,63 @@
       updateTimer();
       timerInterval = setInterval(updateTimer, 1000);
     } else {
-      warningText.innerHTML = "READY!<br>TAP TO OPEN!";
-      warningText.classList.remove('text-red-500', 'neon-text-pink');
-      warningText.classList.add('neon-text-cyan');
+      unlockDispatch();
     }
 
     const messageContainer = document.getElementById('message-container');
     
-    const stickerColors = ['#39ff14', '#ff00de', '#00e5ff', '#ffea00', '#ff007f'];
+    const subHeadlines = [
+      "", 
+      "Observations from the Editor",
+      "The Normal Stuff That Stands Out",
+      "Steady Under Pressure",
+      "Honesty Without the Noise",
+      "Looking Ahead to the New Year",
+      "Wishes for Softer Days"
+    ];
 
     myMessages.forEach((msg, index) => {
-      const sticker = document.createElement('div');
+      const article = document.createElement('div');
+      article.className = "mb-8 break-inside-avoid w-full";
       
-      const randomRotation = (Math.random() * 12) - 6;
-      const bgColor = stickerColors[index % stickerColors.length];
-      
-      sticker.className = `crazy-sticker p-5 sm:p-8 w-[95%] text-center text-lg sm:text-2xl leading-snug uppercase transition-transform hover:scale-110 cursor-crosshair whitespace-pre-wrap`;
-      sticker.style.transform = `rotate(${randomRotation}deg)`;
-      sticker.style.backgroundColor = bgColor;
-      
-      if(bgColor === '#ff007f' || bgColor === '#ff00de') {
-        sticker.style.color = 'white';
-        sticker.style.textShadow = '2px 2px 0 #000';
+      if (index === 0) {
+        article.innerHTML = `
+          <h3 class="text-sm font-bold uppercase tracking-widest mb-3 border-b border-gray-400 inline-block pb-1">Front Page Exclusive</h3>
+          <p class="text-base sm:text-lg leading-relaxed text-gray-900 first-letter:text-6xl first-letter:font-black first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:headline-font">
+            ${msg}
+          </p>
+        `;
+      } else if (index === myMessages.length - 1) {
+        article.className += " border-4 border-double border-gray-800 p-5 bg-[#e5d9b7] mt-4";
+        article.innerHTML = `
+          <h3 class="headline-font text-2xl font-bold uppercase mb-4 text-center border-b border-gray-800 pb-2">Poetry Corner</h3>
+          <p class="whitespace-pre-wrap italic text-center text-sm sm:text-base leading-relaxed font-serif text-gray-900">${msg}</p>
+        `;
+      } else {
+        const subHeadline = subHeadlines[index] || "Update";
+        article.innerHTML = `
+          <h4 class="headline-font text-xl font-bold mb-2 leading-tight">${subHeadline}</h4>
+          <p class="text-sm sm:text-base leading-relaxed text-gray-800">${msg}</p>
+        `;
       }
 
-      sticker.innerText = msg;
-      messageContainer.appendChild(sticker);
+      messageContainer.appendChild(article);
     });
 
     lucide.createIcons();
 
-    function generateConfetti() {
+    function generateTickerTape() {
       confettiContainer.innerHTML = '';
-      const colors = ['#39ff14', '#ff00de', '#00e5ff', '#ffea00', '#fff'];
+      const grays = ['#1a1a1a', '#4a4a4a', '#8a8a8a', '#d3d3d3'];
       
-      for (let i = 0; i < 80; i++) {
+      for (let i = 0; i < 60; i++) {
         const p = document.createElement('div');
-        const color = colors[Math.floor(Math.random() * colors.length)];
+        const color = grays[Math.floor(Math.random() * grays.length)];
         const left = Math.random() * 100;
-        const width = Math.random() * 15 + 5; 
-        const height = Math.random() * 15 + 5;
-        const animDuration = Math.random() * 2 + 1.5; 
-        const animDelay = Math.random() * 1;
-        const isCircle = Math.random() > 0.5;
+        const width = Math.random() * 8 + 4; 
+        const height = Math.random() * 20 + 10;
+        const animDuration = Math.random() * 3 + 2; 
+        const animDelay = Math.random() * 2;
 
         p.style.cssText = `
           position: absolute;
@@ -306,96 +344,112 @@
           width: ${width}px;
           height: ${height}px;
           background-color: ${color};
-          border-radius: ${isCircle ? '50%' : '0%'};
-          border: 2px solid #000;
+          opacity: 0.6;
           animation: fall ${animDuration}s linear ${animDelay}s infinite;
         `;
         confettiContainer.appendChild(p);
       }
     }
 
-    function generateBalloons() {
-      balloonsContainer.innerHTML = ''; 
-      const balloonConfigs = [
-        { color: "#ff00de", left: "5%", delay: "0s", scale: 1, duration: '4s' },
-        { color: "#00e5ff", left: "85%", delay: "0.5s", scale: 1.5, duration: '6s' },
-        { color: "#ffea00", left: "15%", delay: "1.2s", scale: 0.8, duration: '3s' },
-        { color: "#39ff14", left: "75%", delay: "0.2s", scale: 1.2, duration: '5s' },
-        { color: "#ff007f", left: "45%", delay: "1s", scale: 2, duration: '7s' } 
-      ];
-
-      balloonConfigs.forEach(config => {
-        const b = document.createElement('div');
-        b.className = "absolute bottom-0 animate-float-crazy z-0 opacity-80 mix-blend-screen";
-        b.style.left = config.left;
-        b.style.animationDelay = config.delay;
-        b.style.animationDuration = config.duration;
-        b.style.transform = `scale(${config.scale})`;
-
-        b.innerHTML = `
-          <svg width="80" height="200" viewBox="0 0 60 180" class="drop-shadow-[0_0_20px_${config.color}]">
-            <path d="M 30 80 Q 20 110 40 140 T 20 180" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="5,5" />
-            <path d="M 30 10 C -10 10, -10 60, 25 78 C 28 80, 32 80, 35 78 C 70 60, 70 10, 30 10 Z" fill="${config.color}" stroke="#fff" stroke-width="2"/>
-            <path d="M 25 78 L 35 78 L 33 85 L 27 85 Z" fill="${config.color}" stroke="#fff" stroke-width="2"/>
-            <circle cx="20" cy="30" r="5" fill="#fff" opacity="0.8"/>
-            <circle cx="28" cy="22" r="3" fill="#fff" opacity="0.8"/>
-          </svg>
-        `;
-        balloonsContainer.appendChild(b);
-      });
-    }
-
-    function startParty() {
-      const now = new Date();
-      if (now < birthdayDate) {
-        warningText.innerHTML = "LOCKED!<br>COME BACK LATER!";
-        warningText.classList.remove('neon-text-cyan');
-        warningText.classList.add('neon-text-pink', 'text-red-500'); 
-        
-        giftContainer.classList.add('animate-shake-violent');
-        
-        setTimeout(() => {
-          giftContainer.classList.remove('animate-shake-violent');
-          warningText.innerHTML = "SPECIAL GIFT!<br>NO PEEKING!";
-          warningText.classList.remove('neon-text-pink', 'text-red-500');
-          warningText.classList.add('neon-text-cyan');
-        }, 800);
-        
-        return; 
-      }
-
-      giftContainer.classList.add('animate-explode');
+    function forceOpenNewspaper() {
+      unopenedWrapper.classList.add('hidden');
+      
+      openedWrapper.classList.remove('hidden');
+      openedWrapper.classList.add('flex'); 
+      
+      confettiContainer.classList.remove('hidden');
+      generateTickerTape();
       
       setTimeout(() => {
-        unopenedWrapper.classList.add('hidden');
-        giftContainer.classList.remove('animate-explode'); 
-        
-        openedWrapper.classList.remove('hidden');
-        openedWrapper.classList.add('flex'); 
-        
-        confettiContainer.classList.remove('hidden');
-        balloonsContainer.classList.remove('hidden');
-        
-        generateConfetti();
-        generateBalloons();
-      }, 400); 
+        confettiContainer.classList.add('hidden');
+        confettiContainer.innerHTML = '';
+      }, 8000);
     }
 
-    function endParty() {
+    function handleWrapperClick(e) {
+      if (e.target.closest('#action-buttons')) return;
+
+      const now = new Date();
+      if (now < birthdayDate) {
+        warningText.innerHTML = "STILL UNDER EMBARGO!";
+        giftContainer.classList.add('animate-shake');
+        
+        setTimeout(() => {
+          giftContainer.classList.remove('animate-shake');
+          warningText.innerHTML = "EMBARGOED RELEASE!<br>DO NOT OPEN YET!";
+        }, 800);
+        return; 
+      }
+      
+      forceOpenNewspaper();
+    }
+
+    function foldNewspaper() {
       openedWrapper.classList.add('hidden');
       openedWrapper.classList.remove('flex');
-      
       unopenedWrapper.classList.remove('hidden');
       
       confettiContainer.classList.add('hidden');
-      balloonsContainer.classList.add('hidden');
-      
       confettiContainer.innerHTML = '';
-      balloonsContainer.innerHTML = '';
     }
 
-    unopenedWrapper.addEventListener('click', startParty);
-    closeBtn.addEventListener('click', endParty);
+    coverPhotoInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          uploadedImage.src = event.target.result;
+          uploadedImage.classList.remove('hidden');
+          defaultCake.classList.add('hidden');
+          
+          forceOpenNewspaper();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    unopenedWrapper.addEventListener('click', handleWrapperClick);
+    openNewspaperBtn.addEventListener('click', forceOpenNewspaper);
+    closeBtn.addEventListener('click', foldNewspaper);
+
+    const telegramForm = document.getElementById('telegram-form');
+    const telegramSubmitBtn = document.getElementById('telegram-submit-btn');
+
+    telegramForm.addEventListener('submit', function(e) {
+      e.preventDefault(); 
+      
+      const originalBtnText = telegramSubmitBtn.innerText;
+      telegramSubmitBtn.innerText = "Transmitting...";
+      telegramSubmitBtn.disabled = true;
+      telegramSubmitBtn.classList.add('opacity-50', 'cursor-not-allowed');
+
+      const formData = new FormData(telegramForm);
+
+      fetch(telegramForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json' 
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        telegramForm.innerHTML = `
+          <div class="p-8 border-2 border-dashed border-gray-800 bg-[#fdfbf7] text-center transform -rotate-1">
+            <i data-lucide="check-circle-2" class="w-12 h-12 mx-auto mb-4 text-green-700"></i>
+            <h4 class="headline-font text-2xl font-bold uppercase mb-2">Telegram Successfully Dispatched!</h4>
+            <p class="text-gray-700 italic font-serif">Your message has been securely transmitted to the editor's desk. Thank you!</p>
+          </div>
+        `;
+        lucide.createIcons(); 
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        telegramSubmitBtn.innerText = "Transmission Failed. Try Again.";
+        telegramSubmitBtn.disabled = false;
+        telegramSubmitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      });
+    });
 
   </script>
 </body>
